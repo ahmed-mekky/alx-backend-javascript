@@ -1,6 +1,5 @@
-*/push
-push
 node_modules
+*/node_modules
 */*-main.js
 */package.json
 */package-lock.json
