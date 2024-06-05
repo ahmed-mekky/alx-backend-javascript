@@ -1,45 +1,26 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 
-function countStudents(path) {
+async function countStudents(fileName) {
   try {
-    const data = fs.readFileSync(path, 'utf8');
-
+    const data = await fs.readFile(fileName, 'utf-8');
     const lines = data.trim().split('\n');
+    const students = lines.slice(1).filter((line) => line.trim() !== '');
 
-    const validLines = lines.filter((line) => line.trim() !== '');
+    const studentCount = students.length;
+    console.log(`Number of students: ${studentCount}`);
 
-    if (validLines.length === 0) {
-      console.log('Number of students: 0');
-      return;
-    }
-
-    const header = validLines[0].split(',');
-
-    const fieldIndex = header.indexOf('field');
-    const firstNameIndex = header.indexOf('firstname');
-
-    const fieldData = {};
-
-    for (let i = 1; i < validLines.length; i++) {
-      const student = validLines[i].split(',');
-
-      const field = student[fieldIndex];
-      const firstName = student[firstNameIndex];
-
-      if (!fieldData[field]) {
-        fieldData[field] = { count: 0, list: [] };
+    const fields = {};
+    students.forEach((student) => {
+      const [firstname, , , field] = student.split(',');
+      if (!fields[field]) {
+        fields[field] = [];
       }
+      fields[field].push(firstname);
+    });
 
-      fieldData[field].count += 1;
-      fieldData[field].list.push(firstName);
-    }
-
-    const totalStudents = validLines.length - 1;
-    console.log(`Number of students: ${totalStudents}`);
-
-    for (const [field, data] of Object.entries(fieldData)) {
+    for (const [field, names] of Object.entries(fields)) {
       console.log(
-        `Number of students in ${field}: ${data.count}. List: ${data.list.join(
+        `Number of students in ${field}: ${names.length}. List: ${names.join(
           ', '
         )}`
       );
