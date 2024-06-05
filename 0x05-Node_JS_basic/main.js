@@ -1,3 +1,3 @@
-const countStudents = require('./2-read_file');
+const displayMessage = require('./0-console');
 
-countStudents('database.csv');
+displayMessage('Hello NodeJS!');
