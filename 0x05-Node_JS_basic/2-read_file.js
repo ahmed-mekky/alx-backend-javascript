@@ -34,7 +34,7 @@ function countStudents(path) {
       fieldData[field].list.push(firstName);
     }
 
-    const totalStudents = validLines.length;
+    const totalStudents = validLines.length - 1;
     console.log(`Number of students: ${totalStudents}`);
 
     for (const [field, data] of Object.entries(fieldData)) {
