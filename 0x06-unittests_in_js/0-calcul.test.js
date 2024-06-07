@@ -1,4 +1,4 @@
-const assert = require('chai').assert
+const assert = require('assert')
 const calculateNumber = require('./0-calcul')
 
 describe('calcul', () => {
@@ -20,6 +20,6 @@ describe('calcul', () => {
   })
   it('should return number', () => {
     const result = calculateNumber(3.6, 2)
-    assert.typeOf(result, 'number')
+    assert.equal(typeof result, 'number')
   })
 })
