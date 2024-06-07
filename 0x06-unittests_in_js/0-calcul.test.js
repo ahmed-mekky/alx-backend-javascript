@@ -1,5 +1,6 @@
+#!/usr/bin/node
 const assert = require('assert')
-const calculateNumber = require('./0-calcul')
+const calculateNumber = require('./0-calcul.js')
 
 describe('calcul', () => {
   it('should return -4 for -2.4, -2', () => {
