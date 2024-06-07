@@ -22,4 +22,20 @@ describe('calcul', () => {
     const result = calculateNumber(3.6, 2)
     assert.equal(typeof result, 'number')
   })
+  it('should not accept string a', () => {
+    const result = calculateNumber(1, 'alx')
+    assert.equal(result, null)
+  })
+  it('should not accept string b', () => {
+    const result = calculateNumber('alx', 2)
+    assert.equal(result, null)
+  })
+  it('should return boolean a', () => {
+    const result = calculateNumber(true, 2)
+    assert.equal(result, null)
+  })
+  it('should return boolean b', () => {
+    const result = calculateNumber(1, false)
+    assert.equal(result, null)
+  })
 })
