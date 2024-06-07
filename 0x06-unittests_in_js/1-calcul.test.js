@@ -23,6 +23,10 @@ describe('calculateNumber', () => {
     const result = calculateNumber('DIVIDE', 5.7, 2)
     assert.equal(result, 3)
   })
+  it(' DIVIDE null if b is 0', () => {
+    const result = calculateNumber('DIVIDE', 5.7, 0)
+    assert.equal(result, null)
+  })
   it('should not accept string a', () => {
     const result = calculateNumber('SUM', 1, 'alx')
     assert.equal(result, null)
