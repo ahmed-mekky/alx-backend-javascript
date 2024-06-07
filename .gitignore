@@ -1,6 +1,0 @@
-node_modules
-*/*-main.js
-*/babel.config.js
-package.json
-.eslintrc.js
-babel.config.js
