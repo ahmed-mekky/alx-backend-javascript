@@ -1,3 +1,4 @@
+#!/usr/bin/node
 function calculateNumber(a, b){
     if (typeof a != 'number' || typeof b != 'number'){
         return null
