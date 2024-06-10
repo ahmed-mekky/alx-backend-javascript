@@ -9,7 +9,7 @@ function countStudents(path) {
       return values.length > 0 ? values : null;
     })[0];
     const data = content.slice(1);
-    console.log(`Number of students ${data.length}`);
+    console.log(`Number of students: ${data.length}`);
     const fields = Object;
     data.forEach((line) => {
       const element = line.split(',');
