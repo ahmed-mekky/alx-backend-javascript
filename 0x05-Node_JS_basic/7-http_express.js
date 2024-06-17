@@ -29,17 +29,17 @@ async function countStudents(path, res) {
       if (fields[key]) {
         if (key === lastKey) {
           res.end(
-            `Number of students in ${key}: ${fields[key].length}. List: ${fields[key]}`
+            `Number of students in ${key}: ${fields[key].length}. List: ${fields[key]}`,
           );
         } else {
           res.write(
-            `Number of students in ${key}: ${fields[key].length}. List: ${fields[key]}\n`
+            `Number of students in ${key}: ${fields[key].length}. List: ${fields[key]}\n`,
           );
         }
       }
     }
   } catch (err) {
-    res.send('Cannot load the database');
+    res.end('Cannot load the database');
   }
 }
 
