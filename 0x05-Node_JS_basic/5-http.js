@@ -1,52 +1,50 @@
-const http = require('http')
-const fs = require('fs')
+const http = require('http');
+const fs = require('fs');
+const { argv } = require('process');
 
+async function countStudents(path, res) {
+  try {
+    const fileContent = await fs.readFileSync(path, 'utf-8');
+    const lines = fileContent.split();
+    const content = lines.map((line) => {
+      const values = line.trim().split('\n');
+      return values.length > 0 ? values : null;
+    })[0];
+    const data = content.slice(1);
+    res.write(`Number of students: ${data.length}\n`);
+    const fields = {};
+    data.forEach((line) => {
+      const element = line.split(',');
+      const fname = element[0];
+      const field = element[3];
+      if (field in fields) {
+        fields[field].push(` ${fname}`);
+      } else {
+        fields[field] = [fname];
+      }
+    });
+    for (const key in fields) {
+      if (fields[key]) {
+        res.write(
+          `Number of students in ${key}: ${fields[key].length}. List: ${fields[key]}\n`,
+        );
+      }
+    }
+    res.end();
+  } catch (err) {
+    throw new Error('Cannot load the database');
+  }
+}
 const app = http.createServer((req, res) => {
   if (req.url === '/') {
-    res.writeHead(200, { 'Content-Type': 'text/plain' })
-    res.end('Hello Holberton School!\n')
+    res.end('Hello Holberton School!\n');
   } else if (req.url === '/students') {
-    fs.readFile('database.csv', 'utf8', (err, data) => {
-      if (err) {
-        res.writeHead(500, { 'Content-Type': 'text/plain' })
-        res.end('Error: Cannot load the database\n')
-        return
-      }
-
-      const lines = data
-        .trim()
-        .split('\n')
-        .filter((line) => line.trim() !== '')
-      const students = lines.map((line) => line.split(','))
-
-      const fields = students.shift()
-      const fieldCount = new Map()
-
-      fields.forEach((field) => fieldCount.set(field, []))
-
-      students.forEach((student) => {
-        student.forEach((value, index) => {
-          fieldCount.get(fields[index]).push(value)
-        })
-      })
-
-      res.writeHead(200, { 'Content-Type': 'text/plain' })
-      res.write('This is the list of our students:\n')
-      fieldCount.forEach((list, field) => {
-        res.write(
-          `Number of students in ${field}: ${list.length}. List: ${list.join(
-            ', '
-          )}\n`
-        )
-      })
-      res.end()
-    })
+    countStudents(argv[2], res);
   } else {
-    res.writeHead(404, { 'Content-Type': 'text/plain' })
-    res.end('Not found\n')
+    res.end('Not found\n');
   }
-})
+});
 
-app.listen(1245)
+app.listen(1245);
 
-module.exports = app
+module.exports = app;
