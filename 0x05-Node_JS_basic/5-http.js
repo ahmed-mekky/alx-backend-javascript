@@ -29,7 +29,7 @@ async function countStudents(path, res) {
       if (fields[key]) {
         if (key === lastKey) {
           res.end(
-            `Number of students in ${key}: ${fields[key].length}. List: ${fields[key]}\n`,
+            `Number of students in ${key}: ${fields[key].length}. List: ${fields[key]}`,
           );
         } else {
           res.write(
