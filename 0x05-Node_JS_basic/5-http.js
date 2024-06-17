@@ -23,18 +23,18 @@ async function countStudents(path, res) {
         fields[field] = [fname];
       }
     });
-    const keys = Object.keys(fields)
+    const keys = Object.keys(fields);
     const lastKey = keys[keys.length - 1];
     for (const key in fields) {
       if (fields[key]) {
-        if (key == lastKey) {
-            res.end(
-              `Number of students in ${key}: ${fields[key].length}. List: ${fields[key]}\n`
-            );
-        } else {
-            res.write(
+        if (key === lastKey) {
+          res.end(
             `Number of students in ${key}: ${fields[key].length}. List: ${fields[key]}\n`,
-            );
+          );
+        } else {
+          res.write(
+            `Number of students in ${key}: ${fields[key].length}. List: ${fields[key]}\n`,
+          );
         }
       }
     }
