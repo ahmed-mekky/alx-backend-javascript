@@ -11,7 +11,6 @@ async function countStudents(path, res) {
       return values.length > 0 ? values : null;
     })[0];
     const data = content.slice(1);
-    res.write('This is the list of our students');
     res.write(`Number of students: ${data.length}\n`);
     const fields = {};
     data.forEach((line) => {
@@ -39,15 +38,15 @@ async function countStudents(path, res) {
         }
       }
     }
-    res.end();
   } catch (err) {
-    throw new Error('Cannot load the database');
+    res.end('Cannot load the database');
   }
 }
 const app = http.createServer((req, res) => {
   if (req.url === '/') {
     res.end('Hello Holberton School!');
   } else if (req.url === '/students') {
+    res.write('This is the list of our students\n');
     countStudents(argv[2], res);
   } else {
     res.end('Not found\n');
