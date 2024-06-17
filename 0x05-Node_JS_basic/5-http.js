@@ -11,6 +11,7 @@ async function countStudents(path, res) {
       return values.length > 0 ? values : null;
     })[0];
     const data = content.slice(1);
+    res.write('This is the list of our students');
     res.write(`Number of students: ${data.length}\n`);
     const fields = {};
     data.forEach((line) => {
