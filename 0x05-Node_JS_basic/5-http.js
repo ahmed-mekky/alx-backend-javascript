@@ -45,7 +45,7 @@ async function countStudents(path, res) {
 }
 const app = http.createServer((req, res) => {
   if (req.url === '/') {
-    res.end('Hello Holberton School!\n');
+    res.end('Hello Holberton School!');
   } else if (req.url === '/students') {
     countStudents(argv[2], res);
   } else {
