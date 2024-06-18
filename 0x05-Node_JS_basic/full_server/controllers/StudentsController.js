@@ -16,11 +16,11 @@ class StudentsController {
 
           if (field === lastKey) {
             res.end(
-              `Number of students in ${field}: ${numStudents}. List: ${firstNames}`
+              `Number of students in ${field}: ${numStudents}. List: ${firstNames}`,
             );
           } else {
             res.write(
-              `Number of students in ${field}: ${numStudents}. List: ${firstNames}\n`
+              `Number of students in ${field}: ${numStudents}. List: ${firstNames}\n`,
             );
           }
         });
