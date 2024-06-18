@@ -16,7 +16,7 @@ async function readDatabase(path) {
         const fname = element[0];
         const field = element[3];
         if (field in fields) {
-          fields[field].push(` ${fname}`);
+          fields[field].push(`${fname}`);
         } else {
           fields[field] = [fname];
         }
