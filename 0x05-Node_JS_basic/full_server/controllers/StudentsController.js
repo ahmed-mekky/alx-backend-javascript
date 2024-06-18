@@ -39,7 +39,6 @@ class StudentsController {
         const students = response[field];
 
         if (students) {
-          res.write('This is the list of our students\n');
           const firstNames = students.map((student) => student).join(', ');
 
           res.end(`List: ${firstNames}`);
