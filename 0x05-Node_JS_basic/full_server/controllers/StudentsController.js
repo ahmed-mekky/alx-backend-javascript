@@ -6,6 +6,7 @@ class StudentsController {
       .then((response) => {
         res.write('This is the list of our students\n');
         const fields = Object.keys(response);
+        const lastKey = fields[fields.length - 1];
         fields.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
         fields.forEach((field) => {
@@ -13,9 +14,15 @@ class StudentsController {
           const numStudents = students.length;
           const firstNames = students.map((student) => student).join(', ');
 
-          res.write(
-            `Number of students in ${field}: ${numStudents}. List: ${firstNames}`,
-          );
+          if (field === lastKey) {
+            res.end(
+              `Number of students in ${field}: ${numStudents}. List: ${firstNames}`
+            );
+          } else {
+            res.write(
+              `Number of students in ${field}: ${numStudents}. List: ${firstNames}\n`
+            );
+          }
         });
 
         res.end();
