@@ -11,18 +11,16 @@ class StudentsController {
         fields.forEach((field) => {
           const students = response[field];
           const numStudents = students.length;
-          const firstNames = students
-            .map((student) => student)
-            .join(', ');
+          const firstNames = students.map((student) => student).join(', ');
 
           res.write(
-            `Number of students in ${field}: ${numStudents}. List: ${firstNames}\n`
+            `Number of students in ${field}: ${numStudents}. List: ${firstNames}`,
           );
         });
 
         res.end();
       })
-      .catch((err) => {
+      .catch(() => {
         res.status(500).end('Cannot load the database');
       });
   }
@@ -35,15 +33,13 @@ class StudentsController {
 
         if (students) {
           res.write('This is the list of our students\n');
-          const firstNames = students
-            .map((student) => student)
-            .join(', ');
+          const firstNames = students.map((student) => student).join(', ');
 
-          res.end(`List: ${firstNames}\n`);
+          res.end(`List: ${firstNames}`);
         }
         res.status(500).end('Major parameter must be CS or SWE');
       })
-      .catch((err) => {
+      .catch(() => {
         res.status(500).end('Cannot load the database');
       });
   }
